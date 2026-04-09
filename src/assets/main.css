@@ -1,18 +1,19 @@
 @import './base.css';
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap');
 
 :root {
-  --bg-page: #f4f7f5;
+  --bg-page: #edf1ed;
   --bg-surface: #ffffff;
   --surface-glass: rgba(255, 255, 255, 0.82);
-  --text-main: #1e2c25;
-  --text-muted: #586b61;
-  --brand-700: #20553a;
-  --brand-600: #2e6e4d;
-  --brand-400: #79a88f;
-  --line-soft: #d1ddd6;
-  --shadow-soft: 0 10px 30px rgba(26, 49, 37, 0.08);
-  --header-h: 78px;
+  --text-main: #172920;
+  --text-muted: #5a6b63;
+  --brand-700: #163229;
+  --brand-600: #2f5141;
+  --brand-400: #7f9f8f;
+  --line-soft: #d5ddd8;
+  --shadow-soft: 0 18px 50px rgba(18, 37, 29, 0.08);
+  --layout-width: 1420px;
+  --layout-gutter: clamp(24px, 3.6vw, 44px);
 }
 
 * {
@@ -28,10 +29,11 @@ body,
 }
 
 body {
-  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
   color: var(--text-main);
   background: var(--bg-page);
   line-height: 1.55;
+  overflow-x: hidden;
 }
 
 h1,
@@ -39,8 +41,8 @@ h2,
 h3,
 h4 {
   margin: 0;
-  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
-  letter-spacing: 0.005em;
+  font-family: 'Space Grotesk', 'Manrope', 'Segoe UI', sans-serif;
+  letter-spacing: -0.03em;
   font-weight: 700;
 }
 
@@ -54,12 +56,10 @@ img {
   display: block;
 }
 
-.page-shell {
-  padding-top: var(--header-h);
-}
+
 
 .section-wrap {
-  max-width: 1240px;
+  max-width: var(--layout-width);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 var(--layout-gutter);
 }

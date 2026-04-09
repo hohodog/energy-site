@@ -1,29 +1,29 @@
 <template>
   <section class="others-page section-wrap">
     <header class="card">
-      <p class="eyebrow">Resources</p>
-      <h1>Engineering Resources & Project Notes</h1>
-      <p>Quick references used during early-stage technical and commercial screening.</p>
+      <p class="eyebrow">资料中心</p>
+      <h1>工程资料与项目参考</h1>
+      <p>用于前期技术判断与商务筛选的快速参考内容。</p>
     </header>
 
     <section class="grid">
       <article class="card">
-        <h2>Common Project Scenarios</h2>
+        <h2>常见项目场景</h2>
         <ul>
-          <li>2-4 hour C&I peak shaving and backup</li>
-          <li>6-10 hour long-duration shifting</li>
-          <li>High-cycle fast-response power support</li>
-          <li>Low-temperature deployment requirements</li>
+          <li>2-4 小时工商业削峰与备电</li>
+          <li>6-10 小时长时储能调峰</li>
+          <li>高频次快速响应功率支撑</li>
+          <li>低温环境部署需求</li>
         </ul>
       </article>
 
       <article class="card">
-        <h2>Document Checklist</h2>
+        <h2>文件清单</h2>
         <ul>
-          <li>Cell/module test reports</li>
-          <li>Safety and transport certifications</li>
-          <li>Lifecycle and degradation assumptions</li>
-          <li>Manufacturing and traceability statements</li>
+          <li>电芯 / 模组测试报告</li>
+          <li>安全与运输认证文件</li>
+          <li>寿命与衰减假设说明</li>
+          <li>生产与追溯相关声明</li>
         </ul>
       </article>
     </section>
@@ -32,8 +32,8 @@
 
 <style scoped>
 .others-page {
-  padding-top: 26px;
-  padding-bottom: 42px;
+  padding-top: 8px;
+  padding-bottom: 18px;
   display: grid;
   gap: 20px;
 }

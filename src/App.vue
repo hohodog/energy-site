@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView } from 'vue-router'
 import Navbar from './components/Navbar.vue'
+import SiteFooter from './components/SiteFooter.vue'
 </script>
 
 <template>
@@ -8,4 +9,5 @@ import Navbar from './components/Navbar.vue'
   <main class="page-shell">
     <RouterView />
   </main>
+  <SiteFooter />
 </template>
