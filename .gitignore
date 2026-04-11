@@ -37,3 +37,7 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+
+# Source decks and working materials
+网站内容/
+网站内容.zip

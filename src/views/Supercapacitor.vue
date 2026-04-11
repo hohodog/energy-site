@@ -1,25 +1,22 @@
 <script setup>
-import DeckMaterialPage from '../components/DeckMaterialPage.vue'
-import page01 from '../assets/supercapacitor/slides/page-01.jpg'
-import page02 from '../assets/supercapacitor/slides/page-02.jpg'
-import page03 from '../assets/supercapacitor/slides/page-03.jpg'
-import page04 from '../assets/supercapacitor/slides/page-04.jpg'
-import page05 from '../assets/supercapacitor/slides/page-05.jpg'
-import page06 from '../assets/supercapacitor/slides/page-06.jpg'
+import ImageStackPage from '../components/ImageStackPage.vue'
+import page01 from '../assets/site-content/supercapacitor/page-01.jpg'
+import page02 from '../assets/site-content/supercapacitor/page-02.jpg'
+import page03 from '../assets/site-content/supercapacitor/page-03.jpg'
+import page04 from '../assets/site-content/supercapacitor/page-04.jpg'
+import page05 from '../assets/site-content/supercapacitor/page-05.jpg'
+import page06 from '../assets/site-content/supercapacitor/page-06.jpg'
 
-const slides = [
-  { src: page01, alt: '超级电容资料第 1 页' },
-  { src: page02, alt: '超级电容资料第 2 页' },
-  { src: page03, alt: '超级电容资料第 3 页' },
-  { src: page04, alt: '超级电容资料第 4 页' },
-  { src: page05, alt: '超级电容资料第 5 页' },
-  { src: page06, alt: '超级电容资料第 6 页' },
+const images = [
+  { src: page01, alt: 'Supercapacitor source deck page 1' },
+  { src: page02, alt: 'Supercapacitor source deck page 2' },
+  { src: page03, alt: 'Supercapacitor source deck page 3' },
+  { src: page04, alt: 'Supercapacitor source deck page 4' },
+  { src: page05, alt: 'Supercapacitor source deck page 5' },
+  { src: page06, alt: 'Supercapacitor source deck page 6' },
 ]
 </script>
 
 <template>
-  <DeckMaterialPage
-    theme="super"
-    :slides="slides"
-  />
+  <ImageStackPage :images="images" />
 </template>

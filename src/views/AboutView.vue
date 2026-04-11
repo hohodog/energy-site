@@ -1,7 +1,10 @@
 <script setup>
-import AboutCorporate from '../components/variants/AboutCorporate.vue'
+import ImageStackPage from '../components/ImageStackPage.vue'
+import teamIntroduction from '../assets/site-content/home/02-team-introduction.png'
+
+const images = [{ src: teamIntroduction, alt: 'Team introduction' }]
 </script>
 
 <template>
-  <AboutCorporate />
+  <ImageStackPage :images="images" />
 </template>

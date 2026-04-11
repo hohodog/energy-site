@@ -1,6 +1,0 @@
-title=Energy Storage Technologies
-
-menu1=Sodium ion batteries
-menu2=Supercapacitor
-menu3=Redox Flow Batteries
-menu4=Solid-State Batteries

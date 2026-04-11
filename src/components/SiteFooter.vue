@@ -1,13 +1,20 @@
 <script setup>
-const year = new Date().getFullYear()
+const solutions = [
+  { label: 'Sodium-Ion', path: '/sodium' },
+  { label: 'Supercapacitors', path: '/supercapacitor' },
+  { label: 'Flow Batteries', path: '/redox' },
+  { label: 'Solid-State', path: '/solid' },
+]
 
-const footerLinks = [
-  { label: '首页', path: '/' },
-  { label: '钠离子电池', path: '/sodium' },
-  { label: '超级电容', path: '/supercapacitor' },
-  { label: '固态电池', path: '/solid' },
-  { label: '液流电池', path: '/redox' },
-  { label: '关于我们', path: '/about' },
+const companyLinks = [
+  { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
+]
+
+const focusAreas = [
+  'Battery technology screening',
+  'Supplier connection in China',
+  'Cross-border technical coordination',
 ]
 </script>
 
@@ -15,35 +22,68 @@ const footerLinks = [
   <footer class="site-footer">
     <div class="section-wrap">
       <div class="footer-shell">
-        <div class="footer-main">
-          <RouterLink class="footer-brand" to="/">
-            <span class="footer-brand-mark" aria-hidden="true">
-              <span class="footer-brand-mark-core"></span>
-            </span>
-
-            <span class="footer-brand-copy">
-              <strong>储能智联</strong>
-              <span>Advanced Energy Solutions</span>
-            </span>
-          </RouterLink>
-
-          <nav class="footer-nav" aria-label="页脚导航">
-            <RouterLink
-              v-for="item in footerLinks"
-              :key="item.path"
-              :to="item.path"
-              class="footer-link"
-            >
-              {{ item.label }}
+        <section class="footer-top">
+          <div class="footer-brand-block">
+            <RouterLink class="footer-brand" to="/">
+              <span class="footer-brand-mark" aria-hidden="true">SL</span>
+              <span class="footer-brand-copy">
+                <strong>StorageLink</strong>
+                <span>EU-facing Battery Sourcing</span>
+              </span>
             </RouterLink>
-          </nav>
 
-          <RouterLink class="footer-cta" to="/contact"> 联系我们 </RouterLink>
-        </div>
+            <p class="footer-intro">
+              We help European projects connect with suitable battery technologies and qualified
+              manufacturing resources in China, with a focus on practical execution rather than
+              generic sourcing advice.
+            </p>
+          </div>
 
-        <div class="footer-bottom">
-          <p>© {{ year }} 储能智联</p>
-        </div>
+          <div class="footer-grid">
+            <nav class="footer-column" aria-label="Solutions">
+              <p class="footer-heading">Solutions</p>
+              <RouterLink
+                v-for="item in solutions"
+                :key="item.path"
+                :to="item.path"
+                class="footer-link"
+              >
+                {{ item.label }}
+              </RouterLink>
+            </nav>
+
+            <nav class="footer-column" aria-label="Company">
+              <p class="footer-heading">Company</p>
+              <RouterLink
+                v-for="item in companyLinks"
+                :key="item.path"
+                :to="item.path"
+                class="footer-link"
+              >
+                {{ item.label }}
+              </RouterLink>
+            </nav>
+
+            <section class="footer-column" aria-label="Focus areas">
+              <p class="footer-heading">Focus</p>
+              <ul class="footer-list">
+                <li v-for="item in focusAreas" :key="item">{{ item }}</li>
+              </ul>
+            </section>
+          </div>
+        </section>
+
+        <section class="footer-bottom">
+          <p class="footer-meta">
+            © 2026 StorageLink. Built for structured cross-border energy collaboration.
+          </p>
+          <div class="footer-bottom-links">
+            <RouterLink to="/about" class="footer-mini-link">How we work</RouterLink>
+            <RouterLink to="/contact" class="footer-mini-link footer-mini-link-accent">
+              Contact
+            </RouterLink>
+          </div>
+        </section>
       </div>
     </div>
   </footer>
@@ -51,301 +91,250 @@ const footerLinks = [
 
 <style scoped>
 .site-footer {
-  margin-top: 28px;
-  padding: 0 0 20px;
-  background: transparent;
+  padding: 28px 0 44px;
 }
 
 .footer-shell {
-  position: relative;
-  overflow: hidden;
+  border: 1px solid rgba(218, 224, 220, 0.92);
   border-radius: 28px;
-  padding: 18px 22px 14px;
-  border: 1px solid rgba(205, 218, 213, 0.75);
   background:
-    radial-gradient(circle at top right, rgba(88, 208, 217, 0.08), transparent 22%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(247, 250, 248, 0.76));
+    linear-gradient(180deg, rgba(251, 252, 251, 0.96), rgba(246, 248, 246, 0.96)),
+    linear-gradient(135deg, rgba(28, 141, 157, 0.03), rgba(22, 61, 52, 0.04));
   box-shadow:
-    0 16px 38px rgba(23, 45, 36, 0.06),
-    inset 0 1px 0 rgba(255, 255, 255, 0.88);
+    0 18px 44px rgba(15, 31, 26, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  overflow: hidden;
 }
 
-.site-footer-tech .footer-shell {
-  border-color: rgba(104, 158, 149, 0.18);
-  background:
-    radial-gradient(circle at top right, rgba(74, 222, 239, 0.12), transparent 24%),
-    linear-gradient(180deg, rgba(8, 26, 23, 0.92), rgba(5, 18, 16, 0.95));
-  box-shadow:
-    0 20px 44px rgba(2, 9, 8, 0.28),
-    inset 0 1px 0 rgba(214, 255, 247, 0.05);
-}
-
-.footer-main {
+.footer-top {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 18px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 48px;
+  padding: 36px 40px 30px;
+}
+
+.footer-brand-block {
+  max-width: 520px;
 }
 
 .footer-brand {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  min-width: 0;
-  text-decoration: none !important;
+  gap: 14px;
+  color: inherit;
+  text-decoration: none;
 }
 
 .footer-brand-mark {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-  border-radius: 13px;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 14px;
   background:
-    linear-gradient(135deg, rgba(30, 199, 223, 0.18), rgba(86, 216, 196, 0.16)),
-    rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(189, 225, 216, 0.78);
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 42%),
+    linear-gradient(135deg, #163d34 0%, #1d8b98 100%);
+  color: #f7fbf9;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.84),
-    0 8px 20px rgba(28, 71, 58, 0.08);
-}
-
-.footer-brand-mark::before,
-.footer-brand-mark::after {
-  content: '';
-  position: absolute;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #1ec7df, #56d8c4);
-}
-
-.footer-brand-mark::before {
-  width: 16px;
-  height: 16px;
-}
-
-.footer-brand-mark::after {
-  width: 24px;
-  height: 2px;
-  transform: rotate(-38deg);
-}
-
-.footer-brand-mark-core {
-  position: relative;
-  z-index: 1;
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: #10392f;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.46);
-}
-
-.site-footer-tech .footer-brand-mark {
-  background:
-    linear-gradient(135deg, rgba(66, 211, 236, 0.18), rgba(115, 227, 240, 0.14)),
-    rgba(255, 255, 255, 0.04);
-  border-color: rgba(103, 154, 147, 0.28);
-  box-shadow:
-    inset 0 1px 0 rgba(218, 255, 248, 0.08),
-    0 10px 24px rgba(4, 12, 11, 0.22);
-}
-
-.site-footer-tech .footer-brand-mark-core {
-  background: #dffcf6;
-  box-shadow: 0 0 0 4px rgba(120, 228, 214, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 10px 24px rgba(18, 52, 43, 0.14);
 }
 
 .footer-brand-copy {
   display: grid;
   gap: 3px;
-  min-width: 0;
 }
 
 .footer-brand-copy strong {
-  color: #173328;
+  color: #17342c;
   font-size: 16px;
-  line-height: 1;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
 }
 
 .footer-brand-copy span {
-  color: #70867d;
-  font-size: 11px;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
+  color: #72857d;
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.site-footer-tech .footer-brand-copy strong {
-  color: #effffc;
+.footer-intro {
+  margin: 22px 0 0;
+  color: #546760;
+  font-size: 14px;
+  line-height: 1.8;
 }
 
-.site-footer-tech .footer-brand-copy span {
-  color: rgba(181, 226, 218, 0.72);
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
 }
 
-.footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 6px;
-  border-radius: 999px;
-  border: 1px solid rgba(214, 224, 219, 0.88);
-  background: rgba(248, 251, 249, 0.72);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    0 6px 18px rgba(19, 41, 32, 0.04);
+.footer-column {
+  min-width: 0;
 }
 
-.site-footer-tech .footer-nav {
-  border-color: rgba(103, 154, 147, 0.2);
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow:
-    inset 0 1px 0 rgba(218, 255, 248, 0.04),
-    0 6px 18px rgba(2, 8, 7, 0.14);
+.footer-heading {
+  margin: 0 0 14px;
+  color: #17342c;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.footer-link,
+.footer-mini-link {
+  color: #4d6159;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .footer-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-  color: #28463a;
+  display: block;
+  padding: 9px 0;
   font-size: 14px;
-  font-weight: 700;
-  text-decoration: none;
-  transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.footer-link:hover {
-  color: #173328;
-  background: linear-gradient(135deg, rgba(34, 197, 219, 0.14), rgba(87, 203, 186, 0.1));
-  transform: translateY(-1px);
-}
-
-.site-footer-tech .footer-link {
-  color: rgba(229, 247, 243, 0.84);
-}
-
-.site-footer-tech .footer-link:hover {
-  color: #f3fffd;
-  background: linear-gradient(135deg, rgba(66, 211, 236, 0.18), rgba(115, 227, 240, 0.1));
-}
-
-.footer-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 46px;
-  padding: 0 18px;
-  border-radius: 999px;
-  color: #f4fffb;
-  background: linear-gradient(135deg, #18362c 0%, #204438 100%);
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-  box-shadow:
-    0 12px 26px rgba(19, 41, 32, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.footer-cta:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 16px 30px rgba(19, 41, 32, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.site-footer-tech .footer-cta {
-  color: #051311;
-  background: linear-gradient(135deg, #4cd8ed 0%, #91f0f2 100%);
-  box-shadow:
-    0 12px 26px rgba(28, 124, 140, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.24);
-}
-
-.footer-bottom {
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(126, 159, 150, 0.12);
-}
-
-.footer-bottom p {
-  margin: 0;
-  color: #7a8f87;
-  font-size: 12px;
   line-height: 1.5;
 }
 
-.site-footer-tech .footer-bottom p {
-  color: rgba(198, 216, 209, 0.58);
+.footer-link:hover,
+.footer-link:focus-visible,
+.footer-mini-link:hover,
+.footer-mini-link:focus-visible,
+.footer-brand:hover,
+.footer-brand:focus-visible {
+  color: #14362d;
+  text-decoration: none;
 }
 
-@media (max-width: 1100px) {
-  .footer-main {
+.footer-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-list li {
+  position: relative;
+  padding: 9px 0 9px 16px;
+  color: #4d6159;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 18px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(29, 139, 152, 0.5);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 40px 22px;
+  border-top: 1px solid rgba(223, 228, 225, 0.92);
+}
+
+.footer-meta {
+  margin: 0;
+  color: #70827a;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.footer-bottom-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-mini-link {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.footer-mini-link-accent {
+  color: #173f35;
+}
+
+.footer-link::after,
+.footer-mini-link::after,
+.footer-brand::after {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .footer-top {
     grid-template-columns: 1fr;
-    justify-items: start;
+    gap: 34px;
   }
 
-  .footer-nav {
-    width: 100%;
-    justify-content: flex-start;
-    border-radius: 24px;
+  .footer-brand-block {
+    max-width: none;
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 820px) {
   .site-footer {
-    margin-top: 24px;
-    padding-bottom: 16px;
+    padding: 20px 0 34px;
   }
 
+  .footer-top {
+    padding: 28px 22px 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 22px 22px;
+  }
+}
+
+@media (max-width: 560px) {
   .footer-shell {
     border-radius: 22px;
-    padding: 16px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .footer-intro {
+    font-size: 13px;
+    line-height: 1.75;
   }
 
   .footer-brand-mark {
-    width: 36px;
-    height: 36px;
-    flex-basis: 36px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+    border-radius: 13px;
   }
 
   .footer-brand-copy strong {
     font-size: 15px;
-  }
-
-  .footer-brand-copy span {
-    font-size: 10px;
-  }
-
-  .footer-nav {
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .footer-link {
-    min-height: 38px;
-    padding: 0 12px;
-    font-size: 13px;
-  }
-
-  .footer-cta {
-    min-height: 42px;
-    padding: 0 16px;
-    font-size: 13px;
   }
 }
 </style>
