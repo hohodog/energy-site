@@ -1,12 +1,12 @@
 <script setup>
 import ImageStackPage from '../components/ImageStackPage.vue'
-import heroNoTitle from '../assets/site-content/home/01-hero-no-title.png'
-import teamIntroduction from '../assets/site-content/home/02-team-introduction.png'
-import homeOverview from '../assets/site-content/home/03-home-overview.png'
-import technologyComparison from '../assets/site-content/home/04-technology-comparison.png'
-import technologyFocus from '../assets/site-content/home/05-technology-focus.png'
-import whyStorageLink from '../assets/site-content/home/06-why-storagelink.png'
-import partnerWithUs from '../assets/site-content/home/07-partner-with-us.png'
+import heroNoTitle from '../assets/site-content/home/01-hero-no-title.webp'
+import teamIntroduction from '../assets/site-content/home/02-team-introduction.webp'
+import homeOverview from '../assets/site-content/home/03-home-overview.webp'
+import technologyComparison from '../assets/site-content/home/04-technology-comparison.webp'
+import technologyFocus from '../assets/site-content/home/05-technology-focus.webp'
+import whyStorageLink from '../assets/site-content/home/06-why-storagelink.webp'
+import partnerWithUs from '../assets/site-content/home/07-partner-with-us.webp'
 
 const images = [
   {

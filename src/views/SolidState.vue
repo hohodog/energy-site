@@ -1,12 +1,12 @@
 <script setup>
 import ImageStackPage from '../components/ImageStackPage.vue'
-import page01 from '../assets/site-content/solid/display/page-01.jpg'
-import page02 from '../assets/site-content/solid/display/page-02.jpg'
-import page03 from '../assets/site-content/solid/display/page-03.jpg'
-import page04 from '../assets/site-content/solid/display/page-04.jpg'
-import page05 from '../assets/site-content/solid/display/page-05.jpg'
-import page06 from '../assets/site-content/solid/display/page-06.jpg'
-import page07 from '../assets/site-content/solid/display/page-07.jpg'
+import page01 from '../assets/site-content/solid/display/page-01.webp'
+import page02 from '../assets/site-content/solid/display/page-02.webp'
+import page03 from '../assets/site-content/solid/display/page-03.webp'
+import page04 from '../assets/site-content/solid/display/page-04.webp'
+import page05 from '../assets/site-content/solid/display/page-05.webp'
+import page06 from '../assets/site-content/solid/display/page-06.webp'
+import page07 from '../assets/site-content/solid/display/page-07.webp'
 
 const slideSize = { width: 3200, height: 1786 }
 
