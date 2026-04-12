@@ -12,6 +12,8 @@ defineProps({
     <figure v-for="(image, index) in images" :key="image.src" class="image-frame">
       <img
         :src="image.src"
+        :srcset="image.srcset"
+        :sizes="image.sizes"
         :alt="image.alt"
         :width="image.width"
         :height="image.height"
