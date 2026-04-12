@@ -4,10 +4,10 @@ import { useRoute } from 'vue-router'
 
 const menuItems = [
   { label: 'Home', path: '/' },
-  { label: 'Sodium-Ion', path: '/sodium' },
+  { label: 'Sodium-ion batteries', path: '/sodium' },
   { label: 'Supercapacitors', path: '/supercapacitor' },
   { label: 'Flow Batteries', path: '/redox' },
-  { label: 'Solid-State', path: '/solid' },
+  { label: 'solid-state batteries', path: '/solid' },
   { label: 'About', path: '/about' },
 ]
 
