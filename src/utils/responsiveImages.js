@@ -1,33 +1,37 @@
-const imageModules = import.meta.glob('../assets/site-content/**/*.webp', {
-  eager: true,
-  import: 'default',
-})
-
 const responsiveWidths = [640, 960, 1280, 1600]
 const defaultSizes =
   '(max-width: 767px) calc(100vw - 42px), (max-width: 1480px) calc(100vw - 78px), 1364px'
+const assetRoot = '../assets/site-content'
 
-const imageUrl = (assetPath) => imageModules[`../assets/site-content/${assetPath}.webp`]
+export const createImageFactory = (imageModules) => {
+  const imageUrl = (assetPath) => imageModules[`${assetRoot}/${assetPath}.webp`]
 
-export const makeImage = ({ path, alt, width, height, sizes = defaultSizes }) => {
-  const src = imageUrl(path)
+  return ({ path, alt, width, height, sizes = defaultSizes }) => {
+    const originalSrc = imageUrl(path)
 
-  if (!src) {
-    throw new Error(`Missing image asset: ${path}.webp`)
-  }
-
-  const srcset = [
-    ...responsiveWidths
+    const candidates = responsiveWidths
       .filter((candidateWidth) => candidateWidth < width)
       .map((candidateWidth) => ({
         width: candidateWidth,
         src: imageUrl(`${path}-${candidateWidth}`),
       }))
-      .filter((candidate) => candidate.src),
-    { width, src },
-  ]
-    .map((candidate) => `${candidate.src} ${candidate.width}w`)
-    .join(', ')
+      .filter((candidate) => candidate.src)
 
-  return { src, srcset, sizes, alt, width, height }
+    if (originalSrc && width <= responsiveWidths.at(-1)) {
+      candidates.push({ width, src: originalSrc })
+    }
+
+    if (!candidates.length) {
+      if (!originalSrc) {
+        throw new Error(`Missing image asset: ${path}.webp`)
+      }
+
+      candidates.push({ width, src: originalSrc })
+    }
+
+    const fallbackSrc = candidates.at(-1)?.src ?? originalSrc
+    const srcset = candidates.map((candidate) => `${candidate.src} ${candidate.width}w`).join(', ')
+
+    return { src: fallbackSrc, srcset, sizes, alt, width, height }
+  }
 }

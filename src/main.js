@@ -1,5 +1,13 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createWebHistory } from 'vue-router'
 
-createApp(App).use(router).mount('#app')
+import { createStorageLinkApp } from './app'
+
+const appRoot = document.getElementById('app')
+const { app, router } = createStorageLinkApp({
+  history: createWebHistory(),
+  ssr: Boolean(appRoot?.hasChildNodes()),
+})
+
+router.isReady().then(() => {
+  app.mount('#app')
+})

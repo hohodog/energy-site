@@ -1,8 +1,16 @@
 <script setup>
 import ImageStackPage from '../components/ImageStackPage.vue'
-import { makeImage } from '../utils/responsiveImages'
+import { createImageFactory } from '../utils/responsiveImages'
+
+defineOptions({ name: 'RedoxPage' })
 
 const slideSize = { width: 1376, height: 768 }
+const makeImage = createImageFactory(
+  import.meta.glob('../assets/site-content/redox/*.webp', {
+    eager: true,
+    import: 'default',
+  }),
+)
 
 const images = [
   makeImage({ path: 'redox/1', alt: 'Flow battery source deck page 1', ...slideSize }),

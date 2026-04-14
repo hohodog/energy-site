@@ -1,6 +1,13 @@
 <script setup>
 import ImageStackPage from '../components/ImageStackPage.vue'
-import { makeImage } from '../utils/responsiveImages'
+import { createImageFactory } from '../utils/responsiveImages'
+
+const makeImage = createImageFactory(
+  import.meta.glob('../assets/site-content/home/02-team-introduction-*.webp', {
+    eager: true,
+    import: 'default',
+  }),
+)
 
 const images = [
   makeImage({

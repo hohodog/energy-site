@@ -2,6 +2,8 @@
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 
+defineOptions({ name: 'SiteNavbar' })
+
 const menuItems = [
   { label: 'Home', path: '/' },
   { label: 'Sodium-ion batteries', path: '/sodium' },

@@ -1,8 +1,14 @@
 <script setup>
 import ImageStackPage from '../components/ImageStackPage.vue'
-import { makeImage } from '../utils/responsiveImages'
+import { createImageFactory } from '../utils/responsiveImages'
 
 const slideSize = { width: 3200, height: 1786 }
+const makeImage = createImageFactory(
+  import.meta.glob('../assets/site-content/solid/display/page-*-*.webp', {
+    eager: true,
+    import: 'default',
+  }),
+)
 
 const images = [
   makeImage({
