@@ -27,11 +27,16 @@ const cards = [
       { label: 'linkedin', href: 'https://www.linkedin.com/company/linkedin/', type: 'in' },
       { label: 'instagram', href: 'https://www.instagram.com/instagram/', type: 'instagram' },
       { label: 'facebook', href: 'https://www.facebook.com/facebook/', type: 'facebook' },
+      { label: 'whatsapp', href: '#', type: 'whatsapp' },
+      { label: 'telegram', href: '#', type: 'telegram' },
+      { label: 'youtube', href: '#', type: 'youtube' },
     ],
-    links: [{ text: 'null.com', href: 'https://null.com', icon: 'link' }],
+    links: [],
     icon: 'grid',
   },
 ]
+
+const splitContactText = (text) => text.split(/(,)/)
 </script>
 
 <template>
@@ -125,11 +130,35 @@ const cards = [
                 <circle cx="32" cy="32" r="8" stroke="url(#instagram-gradient)" stroke-width="4" />
                 <circle cx="42.5" cy="21.5" r="2.5" fill="url(#instagram-gradient)" />
               </svg>
+              <svg v-else-if="social.type === 'whatsapp'" viewBox="0 0 64 64" fill="none">
+                <path
+                  d="M17.5 49L20.3 39.8C18.6 37 17.7 33.8 17.7 30.5C17.7 20.6 25.8 12.5 35.7 12.5C45.6 12.5 53.7 20.6 53.7 30.5C53.7 40.4 45.6 48.5 35.7 48.5C32.6 48.5 29.7 47.7 27.1 46.3L17.5 49Z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M28.5 23.2C28.1 22.3 27.7 22.3 27.1 22.3H25.9C25.5 22.3 24.8 22.5 24.2 23.1C23.6 23.8 22 25.3 22 28.2C22 31.1 24.2 33.9 24.5 34.3C24.8 34.7 28.8 41 35.3 43.2C40.7 45 41.8 44.7 43 44.6C44.2 44.4 46.8 43 47.3 41.5C47.8 40 47.8 38.8 47.7 38.5C47.5 38.2 47.1 38 46.5 37.7L42.1 35.6C41.5 35.3 41.1 35.2 40.7 35.8C40.3 36.4 39.1 37.8 38.8 38.2C38.4 38.6 38.1 38.6 37.5 38.3C36.9 38 34.9 37.4 32.7 35.4C30.9 33.8 29.7 31.8 29.3 31.2C28.9 30.6 29.3 30.3 29.6 30C29.9 29.7 30.2 29.3 30.5 29C30.8 28.7 30.9 28.4 31.1 28C31.3 27.6 31.2 27.2 31 26.9L28.5 23.2Z"
+                  fill="#ffffff"
+                />
+              </svg>
+              <svg v-else-if="social.type === 'telegram'" viewBox="0 0 64 64" fill="none">
+                <circle cx="32" cy="32" r="24" fill="currentColor" />
+                <path
+                  d="M45.7 20.9L40.9 43.7C40.5 45.3 39.6 45.7 38.3 44.9L31 39.5L27.5 42.9C27.1 43.3 26.8 43.6 26.1 43.6L26.6 36.1L40.2 23.8C40.8 23.3 40.1 23 39.3 23.5L22.5 34.1L15.3 31.8C13.7 31.3 13.7 30.2 15.6 29.5L43.8 18.6C45.1 18.2 46.2 18.9 45.7 20.9Z"
+                  fill="#ffffff"
+                />
+              </svg>
+              <svg v-else-if="social.type === 'youtube'" viewBox="0 0 64 64" fill="none">
+                <path
+                  d="M53.3 22.7C52.8 20.8 51.8 19.8 49.9 19.3C46.8 18.5 32 18.5 32 18.5C32 18.5 17.2 18.5 14.1 19.3C12.2 19.8 11.2 20.8 10.7 22.7C9.9 25.8 9.9 32 9.9 32C9.9 32 9.9 38.2 10.7 41.3C11.2 43.2 12.2 44.2 14.1 44.7C17.2 45.5 32 45.5 32 45.5C32 45.5 46.8 45.5 49.9 44.7C51.8 44.2 52.8 43.2 53.3 41.3C54.1 38.2 54.1 32 54.1 32C54.1 32 54.1 25.8 53.3 22.7Z"
+                  fill="currentColor"
+                />
+                <path d="M27.6 37.8V26.2L38.2 32L27.6 37.8Z" fill="#ffffff" />
+              </svg>
               <span v-else>f</span>
             </a>
           </div>
 
-          <div class="contact-lines">
+          <div v-if="card.links?.length" class="contact-lines">
             <a v-for="item in card.links" :key="item.text" :href="item.href" class="contact-link">
               <svg v-if="item.icon === 'phone'" viewBox="0 0 24 24" fill="none">
                 <path
@@ -182,7 +211,16 @@ const cards = [
                   stroke-linejoin="round"
                 />
               </svg>
-              <span>{{ item.text }}</span>
+              <span>
+                <template
+                  v-for="(part, partIndex) in splitContactText(item.text)"
+                  :key="`${item.text}-${partIndex}`"
+                >
+                  {{ part }}<br v-if="item.icon === 'location' && partIndex === 3" /><wbr
+                    v-else-if="part === ','"
+                  />
+                </template>
+              </span>
             </a>
           </div>
 
@@ -205,7 +243,14 @@ const cards = [
                     stroke-linejoin="round"
                   />
                 </svg>
-                <span>{{ item.text }}</span>
+                <span>
+                  <template
+                    v-for="(part, partIndex) in splitContactText(item.text)"
+                    :key="`${item.text}-${partIndex}`"
+                  >
+                    {{ part }}<wbr v-if="part === ','" />
+                  </template>
+                </span>
               </a>
             </div>
           </div>
@@ -217,70 +262,102 @@ const cards = [
 
 <style scoped>
 .contact-page {
-  padding: 51px 51px 67px;
-  background: #efefef;
+  padding: clamp(28px, 5vw, 64px) var(--layout-gutter) clamp(42px, 6vw, 78px);
+  background:
+    linear-gradient(90deg, rgba(255, 214, 23, 0.2) 0 6px, transparent 6px 100%),
+    linear-gradient(180deg, rgba(242, 245, 249, 0.72), rgba(255, 255, 255, 0));
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 73px 35px;
+  gap: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
 .contact-card {
+  position: relative;
   display: grid;
-  grid-template-columns: 226px minmax(0, 1fr);
-  align-items: center;
-  min-height: 341px;
-  padding: 0 56px 0 47px;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: start;
+  gap: 22px;
+  min-width: 0;
+  min-height: 260px;
+  padding: 32px;
   border-radius: 4px;
   background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.025);
+  border: 1px solid var(--line-soft);
+  border-top: 4px solid var(--brand);
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 46px;
+  height: 4px;
+  background: var(--accent);
 }
 
 .card-icon-wrap {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .card-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 132px;
-  height: 132px;
-  border-radius: 999px;
-  background: #ec101c;
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: var(--brand);
   color: #ffffff;
 }
 
+.card-icon::after {
+  content: '';
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--accent);
+}
+
 .card-icon svg {
-  width: 68px;
-  height: 68px;
+  width: 32px;
+  height: 32px;
 }
 
 .card-content {
   min-width: 0;
+  max-width: 100%;
 }
 
 .card-title {
   margin: 0;
-  color: #000000;
-  font-size: 34px;
-  font-weight: 800;
+  color: var(--text-main);
+  font-size: 30px;
+  font-weight: 700;
   line-height: 1.12;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .card-subtitles {
-  margin-top: 29px;
+  margin-top: 20px;
 }
 
 .card-subtitle {
   margin: 0;
-  color: #9c9f9d;
-  font-size: 18px;
+  color: var(--text-soft);
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.42;
 }
@@ -289,24 +366,40 @@ const cards = [
   display: grid;
   gap: 10px;
   margin-top: 28px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .contact-link {
-  display: inline-flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 25px minmax(0, 1fr);
+  align-items: flex-start;
   gap: 11px;
-  width: fit-content;
-  color: #ef212b;
+  width: 100%;
+  max-width: min(100%, 620px);
+  min-width: 0;
+  color: var(--brand);
   text-decoration: none;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .contact-link svg {
+  margin-top: 2px;
   width: 25px;
   height: 25px;
   flex: 0 0 25px;
+}
+
+.contact-link span {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .extra-block {
@@ -335,9 +428,10 @@ const cards = [
 
 .social-row {
   display: grid;
-  grid-template-columns: repeat(4, 37px);
+  grid-template-columns: repeat(4, 48px);
   align-items: center;
-  gap: 35px;
+  gap: 14px 18px;
+  width: max-content;
   margin-top: 34px;
 }
 
@@ -345,18 +439,25 @@ const cards = [
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 37px;
-  height: 37px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #e6ecf4;
+  border-radius: 8px;
+  background: #f8fafc;
   color: #ef212b;
   text-decoration: none;
-  font-size: 33px;
+  font-size: 28px;
   font-weight: 800;
   line-height: 1;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .social-link svg {
-  width: 37px;
-  height: 37px;
+  width: 28px;
+  height: 28px;
 }
 
 .social-link-x {
@@ -375,6 +476,22 @@ const cards = [
   color: #0866ff;
 }
 
+.social-link-whatsapp {
+  color: #25d366;
+}
+
+.social-link-telegram {
+  color: #229ed9;
+}
+
+.social-link-youtube {
+  color: #ff0033;
+}
+
+.social-link:nth-child(n + 5) {
+  margin-left: 33px;
+}
+
 .social-link span {
   display: inline-flex;
   align-items: center;
@@ -389,7 +506,13 @@ const cards = [
 .social-link:hover,
 .social-link:focus-visible {
   text-decoration: none;
-  opacity: 0.9;
+}
+
+.social-link:hover,
+.social-link:focus-visible {
+  background: #ffffff;
+  border-color: #cfd9e7;
+  transform: translateY(-1px);
 }
 
 .contact-link::after,
@@ -399,7 +522,7 @@ const cards = [
 
 @media (max-width: 1280px) {
   .contact-page {
-    padding: 34px 24px 44px;
+    padding: 34px var(--layout-gutter) 44px;
   }
 
   .contact-grid {
@@ -407,23 +530,9 @@ const cards = [
   }
 
   .contact-card {
-    grid-template-columns: 170px minmax(0, 1fr);
-    min-height: 290px;
-    padding: 0 28px;
-  }
-
-  .card-icon {
-    width: 112px;
-    height: 112px;
-  }
-
-  .card-icon svg {
-    width: 56px;
-    height: 56px;
-  }
-
-  .card-title {
-    font-size: 30px;
+    grid-template-columns: 64px minmax(0, 1fr);
+    min-height: 240px;
+    padding: 30px 28px;
   }
 }
 
@@ -450,17 +559,17 @@ const cards = [
   }
 
   .card-icon {
-    width: 88px;
-    height: 88px;
+    width: 52px;
+    height: 52px;
   }
 
   .card-icon svg {
-    width: 44px;
-    height: 44px;
+    width: 30px;
+    height: 30px;
   }
 
   .card-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .card-subtitles {
@@ -478,18 +587,22 @@ const cards = [
   }
 
   .social-row {
-    gap: 22px;
+    gap: 12px 14px;
   }
 
   .social-link {
-    width: 31px;
-    height: 31px;
-    font-size: 28px;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
   }
 
   .social-link svg {
-    width: 31px;
-    height: 31px;
+    width: 25px;
+    height: 25px;
+  }
+
+  .social-link:nth-child(n + 5) {
+    margin-left: 28px;
   }
 }
 </style>
